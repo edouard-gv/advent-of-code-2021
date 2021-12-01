@@ -17,12 +17,15 @@ public class Day1 {
 
     public static int countIncrease(List<Integer> measures) {
         int count = 0;
-        if (measures.size() > 1) {
-            if (measures.get(1) > measures.get(0)) {
+        for (int i = 1; i < measures.size(); i++) {
+            if (measures.get(i) > measures.get(i-1)) {
                 count++;
             }
         }
-
         return count;
+    }
+
+    public static void main(String[] args) throws IOException {
+        System.out.println(countIncrease(readFile()));
     }
 }
