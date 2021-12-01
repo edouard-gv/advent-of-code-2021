@@ -14,4 +14,8 @@ public class Day1 {
         Stream<String> lines = Files.lines(path);
         return lines.map(Integer::parseInt).collect(Collectors.toList());
     }
+
+    public static int countIncrease(List<Integer> measures) {
+        return 0;
+    }
 }
