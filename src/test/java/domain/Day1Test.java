@@ -29,7 +29,12 @@ public class Day1Test {
     }
 
     @Test
-    public void countWithRwoLineIncrease() {
+    public void countWithTwoLineIncrease() {
         assertEquals(1, Day1.countIncrease(List.of(1, 2)));
+    }
+
+    @Test
+    public void countWithTwoLineDecrease() {
+        assertEquals(0, Day1.countIncrease(List.of(2, 1)));
     }
 }
