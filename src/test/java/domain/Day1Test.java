@@ -11,9 +11,9 @@ public class Day1Test {
 
     @Test
     public void readMeasuresInFileA() throws IOException {
-        assertEquals(2000, Day1.readFile("a").size());
-        assertEquals(8895, Day1.readFile("a").get(1999));
-        assertEquals(149, Day1.readFile("a").get(0));
+        assertEquals(2000, Day1.readFile("1").size());
+        assertEquals(8895, Day1.readFile("1").get(1999));
+        assertEquals(149, Day1.readFile("1").get(0));
     }
 
     @Test
@@ -41,5 +41,38 @@ public class Day1Test {
         assertEquals(7, Day1.countSimpleIncreases(List.of(199, 200, 208, 210, 200, 207, 240, 269, 260, 263)));
     }
 
+    @Test
+    public void cumulativeCountWithZeroToTwoLines_shouldReturn0() {
+        assertEquals(0, Day1.countCumulativeIncreases(List.of()));
+        assertEquals(0, Day1.countCumulativeIncreases(List.of(1)));
+        assertEquals(0, Day1.countCumulativeIncreases(List.of(1, 2)));
+        assertEquals(0, Day1.countCumulativeIncreases(List.of(1, 2, 3)));
+    }
+
+    @Test
+    public void cumulativeCountWithFourLinesDecrease_shouldReturn0() {
+        assertEquals(0, Day1.countCumulativeIncreases(List.of(1, 2, 1, 1)));
+    }
+
+    @Test
+    public void cumulativeCountWithFourLinesFlat_shouldReturn0() {
+        assertEquals(0, Day1.countCumulativeIncreases(List.of(1, 2, 2, 1)));
+    }
+
+    @Test
+    public void cumulativeCountWithFourLinesDecrease_shouldReturn1() {
+        assertEquals(1, Day1.countCumulativeIncreases(List.of(1, 2, 2, 2)));
+    }
+
+    @Test
+    public void cumulativeCountInGeneral() {
+        assertEquals(5, Day1.countCumulativeIncreases(List.of(199, 200, 208, 210, 200, 207, 240, 269, 260, 263)));
+    }
+
+    @Test
+    public void exerciseASolution() throws IOException {
+        assertEquals(1616, Day1.countSimpleIncreases(Day1.readFile("1")));
+        assertEquals(1645, Day1.countCumulativeIncreases(Day1.readFile("1")));
+    }
 
 }
