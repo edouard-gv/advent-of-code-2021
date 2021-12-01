@@ -16,6 +16,13 @@ public class Day1 {
     }
 
     public static int countIncrease(List<Integer> measures) {
-        return 0;
+        int count = 0;
+        if (measures.size() > 1) {
+            if (measures.get(1) > measures.get(0)) {
+                count++;
+            }
+        }
+
+        return count;
     }
 }

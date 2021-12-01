@@ -19,7 +19,17 @@ public class Day1Test {
     }
 
     @Test
-    public void countWithOneLine() {
+    public void countWithNoLines() {
         assertEquals(0, Day1.countIncrease(List.of()));
+    }
+
+    @Test
+    public void countWithOneLine() {
+        assertEquals(0, Day1.countIncrease(List.of(1)));
+    }
+
+    @Test
+    public void countWithRwoLineIncrease() {
+        assertEquals(1, Day1.countIncrease(List.of(1, 2)));
     }
 }
