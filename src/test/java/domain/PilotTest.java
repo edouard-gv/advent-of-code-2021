@@ -8,28 +8,36 @@ public class PilotTest {
     @Test
     public void initialPosition() {
         Pilot pilot = new Pilot();
-        assertEquals(new Position(0, 0), pilot.position());
+        assertEquals(new Position(0, 0, 0), pilot.position());
     }
 
     @Test
     public void moveForward() {
         Pilot pilot = new Pilot();
         pilot.move(new Command(Direction.forward, 5));
-        assertEquals(new Position(5, 0), pilot.position());
+        assertEquals(new Position(5, 0, 0), pilot.position());
     }
 
     @Test
     public void moveDown() {
         Pilot pilot = new Pilot();
         pilot.move(new Command(Direction.down, 5));
-        assertEquals(new Position(0, 5), pilot.position());
+        assertEquals(new Position(0, 0, 5), pilot.position());
     }
 
     @Test
     public void moveUp() {
         Pilot pilot = new Pilot();
         pilot.move(new Command(Direction.up, 5));
-        assertEquals(new Position(0, -5), pilot.position());
+        assertEquals(new Position(0, 0, -5), pilot.position());
+    }
+
+    @Test
+    public void moveDownWithAim() {
+        Pilot pilot = new Pilot();
+        pilot.move(new Command(Direction.down, 5));
+        pilot.move(new Command(Direction.forward, 8));
+        assertEquals(new Position(8, 40, 5), pilot.position());
     }
 
     @Test
@@ -43,7 +51,7 @@ down 8
 forward 2""";
         Pilot pilot = new Pilot();
         pilot.batchMove(commands.lines());
-        assertEquals(150, pilot.multiplyHPerDepth());
+        assertEquals(new Position(15, 60, 10), pilot.position());
     }
 
 }

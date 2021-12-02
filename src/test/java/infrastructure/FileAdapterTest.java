@@ -28,8 +28,6 @@ public class FileAdapterTest {
     public void exerciseDay2Solution() throws IOException {
         Pilot pilot = new Pilot();
         pilot.batchMove(FileAdapter.readStringStreamInFile("2"));
-        assertEquals(1694130, pilot.multiplyHPerDepth());
+        assertEquals(1698850445, pilot.multiplyHPerDepth());
     }
-
-
 }

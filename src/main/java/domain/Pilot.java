@@ -6,7 +6,7 @@ public class Pilot {
     private Position position;
 
     public Pilot() {
-        this.position = new Position(0,0);
+        this.position = new Position(0, 0, 0);
     }
 
     public Position position() {
@@ -16,14 +16,17 @@ public class Pilot {
     public void move(Command command) {
         switch (command.direction()) {
             case forward -> this.position = new Position(
-                    this.position.h()+ command.distance(),
-                    this.position.depth());
+                    this.position.h() + command.distance(),
+                    this.position.depth() + this.position().aim() * command.distance(),
+                    this.position().aim());
             case up -> this.position = new Position(
                     this.position.h(),
-                    this.position.depth()- command.distance());
+                    this.position.depth(),
+                    this.position.aim() - command.distance());
             case down -> this.position = new Position(
                     this.position.h(),
-                    this.position.depth()+ command.distance());
+                    this.position.depth(),
+                    this.position.aim() + command.distance());
         }
     }
 
