@@ -1,8 +1,10 @@
-package domain;
+package infrastructure;
 
+import domain.Sonar;
 import infrastructure.FileAdapter;
 import java.io.IOException;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -17,7 +19,7 @@ public class FileAdapterTest {
 
     @Test
     public void exerciseASolution() throws IOException {
-        assertEquals(1616, Sonar.countSimpleIncreases(FileAdapter.readFile("1")));
+        Assertions.assertEquals(1616, Sonar.countSimpleIncreases(FileAdapter.readFile("1")));
         assertEquals(1645, Sonar.countCumulativeIncreases(FileAdapter.readFile("1")));
     }
 }
