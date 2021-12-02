@@ -43,7 +43,7 @@ down 8
 forward 2""";
         Pilot pilot = new Pilot();
         pilot.batchMove(commands.lines());
-        assertEquals(new Position(15,10), pilot.position());
+        assertEquals(150, pilot.multiplyHPerDepth());
     }
 
 }

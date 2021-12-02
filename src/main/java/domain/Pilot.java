@@ -32,4 +32,8 @@ public class Pilot {
                 l -> new Command(Direction.valueOf(l.split(" ")[0]), Integer.parseInt(l.split(" ")[1]))
                 ).forEach(this::move);
     }
+
+    public int multiplyHPerDepth() {
+        return position.h() * position.depth();
+    }
 }
