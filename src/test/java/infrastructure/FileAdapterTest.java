@@ -35,9 +35,7 @@ public class FileAdapterTest {
 
     @Test
     public void exerciseDay3Solution() throws IOException {
-
-        assertEquals(3242606,
-                Analyser.epsilon(new Report(FileAdapter.readStringStreamInFile("3")))
-                        * Analyser.gamma(new Report(FileAdapter.readStringStreamInFile("3"))));
+        Analyser analyser = new Analyser(new Report(FileAdapter.readStringStreamInFile("3")));
+        assertEquals(3242606,analyser.epsilon() * analyser.gamma());
     }
 }

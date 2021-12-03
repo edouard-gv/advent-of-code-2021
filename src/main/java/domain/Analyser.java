@@ -4,11 +4,18 @@ import domain.analyser.Report;
 
 public class Analyser {
 
-    public static int gamma(Report report) {
-        return report.mostCommonBitStream().decimal();
+    private Report report;
+
+    public Analyser(Report report) {
+
+        this.report = report;
     }
 
-    public static int epsilon(Report report) {
-        return report.mostCommonBitStream().invert().decimal();
+    public int gamma() {
+        return this.report.mostCommonBitStream().decimal();
+    }
+
+    public int epsilon() {
+        return this.report.mostCommonBitStream().invert().decimal();
     }
 }

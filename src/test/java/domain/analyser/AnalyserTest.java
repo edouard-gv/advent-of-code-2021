@@ -58,11 +58,12 @@ public class AnalyserTest {
 
     @Test
     public void gamma() {
-        assertEquals(22, Analyser.gamma(new Report(EXAMPLE_STRING.lines())));
+
+        assertEquals(22, new Analyser(new Report(EXAMPLE_STRING.lines())).gamma());
     }
 
     @Test
     public void epsilon() {
-        assertEquals(9, Analyser.epsilon(new Report(EXAMPLE_STRING.lines())));
+        assertEquals(9, new Analyser(new Report(EXAMPLE_STRING.lines())).epsilon());
     }
 }
