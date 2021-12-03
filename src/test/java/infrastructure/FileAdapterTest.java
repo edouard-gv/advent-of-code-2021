@@ -1,9 +1,11 @@
 package infrastructure;
 
+import domain.Analyser;
 import domain.Pilot;
 import domain.Sonar;
 
 import java.io.IOException;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -29,5 +31,13 @@ public class FileAdapterTest {
         Pilot pilot = new Pilot();
         pilot.batchMove(FileAdapter.readStringStreamInFile("2"));
         assertEquals(1698850445, pilot.multiplyHPerDepth());
+    }
+
+    @Test
+    public void exerciseDay3Solution() throws IOException {
+
+        assertEquals(3242606,
+                Analyser.epsilon(FileAdapter.readStringStreamInFile("3"))
+                * Analyser.gamma(FileAdapter.readStringStreamInFile("3")));
     }
 }
