@@ -7,6 +7,7 @@ import domain.Sonar;
 import java.io.IOException;
 import java.util.stream.Stream;
 
+import domain.analyser.Report;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -37,7 +38,7 @@ public class FileAdapterTest {
     public void exerciseDay3Solution() throws IOException {
 
         assertEquals(3242606,
-                Analyser.epsilon(FileAdapter.readStringStreamInFile("3"))
-                * Analyser.gamma(FileAdapter.readStringStreamInFile("3")));
+                Analyser.epsilon(new Report(FileAdapter.readStringStreamInFile("3")))
+                * Analyser.gamma(new Report(FileAdapter.readStringStreamInFile("3"))));
     }
 }
