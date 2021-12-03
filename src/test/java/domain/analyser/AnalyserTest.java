@@ -48,12 +48,12 @@ public class AnalyserTest {
 0010
 0101
 0110""".lines();
-        assertEquals(new BitStream(Stream.of(FALSE, TRUE, TRUE, FALSE)), new Report(input).mostCommonBitStream());
+        assertEquals(new BitList(List.of(FALSE, TRUE, TRUE, FALSE)), new Report(input).mostCommonBitStream());
     }
 
     @Test
     public void convertBooleanListToDecimal() {
-        Assertions.assertEquals(22, new BitStream(Stream.of(TRUE, FALSE, TRUE, TRUE, FALSE)).decimal());
+        Assertions.assertEquals(22, new BitList(List.of(TRUE, FALSE, TRUE, TRUE, FALSE)).decimal());
     }
 
     @Test

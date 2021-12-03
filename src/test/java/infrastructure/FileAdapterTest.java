@@ -3,13 +3,12 @@ package infrastructure;
 import domain.Analyser;
 import domain.Pilot;
 import domain.Sonar;
-
-import java.io.IOException;
-import java.util.stream.Stream;
-
 import domain.analyser.Report;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FileAdapterTest {
@@ -39,6 +38,6 @@ public class FileAdapterTest {
 
         assertEquals(3242606,
                 Analyser.epsilon(new Report(FileAdapter.readStringStreamInFile("3")))
-                * Analyser.gamma(new Report(FileAdapter.readStringStreamInFile("3"))));
+                        * Analyser.gamma(new Report(FileAdapter.readStringStreamInFile("3"))));
     }
 }

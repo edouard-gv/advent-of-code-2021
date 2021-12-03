@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class Report {
-    private final Stream<String> lines;
+    private final List<String> lines;
 
     public Report(Stream<String> lines) {
-        this.lines = lines;
+        this.lines = lines.toList();
     }
 
     static Boolean mostCommonBit(List<Boolean> bits) {
@@ -16,13 +16,12 @@ public class Report {
     }
 
     Stream<List<Boolean>> splitStringsInColumns() {
-        List<String> inputList = lines.toList();
-        int width = inputList.get(0).length();
-        int height = inputList.size();
+        int width = lines.get(0).length();
+        int height = lines.size();
         List<List<Boolean>> output = new ArrayList<>(width);
         for (int i = 0; i < width; i++) {
             List<Boolean> column = new ArrayList<>(height);
-            for (String s : inputList) {
+            for (String s : lines) {
                 column.add('1' == s.charAt(i));
             }
             output.add(column);
@@ -30,8 +29,8 @@ public class Report {
         return output.stream();
     }
 
-    public BitStream mostCommonBitStream() {
-        return new BitStream(this.splitStringsInColumns().map(Report::mostCommonBit));
+    public BitList mostCommonBitStream() {
+        return new BitList(this.splitStringsInColumns().map(Report::mostCommonBit).toList());
     }
 
 }
