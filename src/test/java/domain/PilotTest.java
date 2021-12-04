@@ -1,5 +1,8 @@
 package domain;
 
+import domain.pilot.Command;
+import domain.pilot.Direction;
+import domain.pilot.Position;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

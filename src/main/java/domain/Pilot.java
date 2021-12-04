@@ -1,5 +1,9 @@
 package domain;
 
+import domain.pilot.Command;
+import domain.pilot.Direction;
+import domain.pilot.Position;
+
 import java.util.stream.Stream;
 
 public class Pilot {
