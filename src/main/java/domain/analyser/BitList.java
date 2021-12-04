@@ -11,12 +11,20 @@ public class BitList {
         this.bits = bits;
     }
 
+    public BitList(String stringRepresentation) {
+        this(stringRepresentation.chars().mapToObj(c -> (char) c).map(c -> (c == '1')).toList());
+    }
+
     public int decimal() {
         return Integer.parseInt(bits.stream().map(b -> (b ? "1" : "0")).collect(Collectors.joining()), 2);
     }
 
     public BitList invert() {
         return new BitList(this.bits.stream().map(b -> !b).toList());
+    }
+
+    public Boolean get(int pos) {
+        return bits.get(pos);
     }
 
     @Override

@@ -41,4 +41,12 @@ public class Report {
     public List<String> filterLinesWithBitAtPosition(Boolean bit, int i) {
         return lines.stream().filter(s -> (s.charAt(i) == '1') == bit).toList();
     }
+
+    public BitList rating(Boolean bitCriteria, int pos) {
+        List<String> filteredList = this.filterLinesWithBitAtPosition(this.mostCommonBitStream().get(pos) == bitCriteria, pos);
+        if (filteredList.size() == 1) {
+            return new BitList(filteredList.get(0));
+        }
+        return new Report(filteredList.stream()).rating(bitCriteria, pos+1);
+    }
 }

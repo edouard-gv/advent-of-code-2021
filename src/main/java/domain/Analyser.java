@@ -4,7 +4,7 @@ import domain.analyser.Report;
 
 public class Analyser {
 
-    private Report report;
+    private final Report report;
 
     public Analyser(Report report) {
 
@@ -20,7 +20,6 @@ public class Analyser {
     }
 
     public int rating(Boolean bitCriteria) {
-
-        throw new IllegalArgumentException("Unable to calculate rating, too much numbers left");
+        return this.report.rating(bitCriteria, 0).decimal();
     }
 }

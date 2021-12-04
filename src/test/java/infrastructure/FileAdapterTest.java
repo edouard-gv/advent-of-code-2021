@@ -34,8 +34,14 @@ public class FileAdapterTest {
     }
 
     @Test
-    public void exerciseDay3Solution() throws IOException {
+    public void exerciseDay3SolutionA() throws IOException {
         Analyser analyser = new Analyser(new Report(FileAdapter.readStringStreamInFile("3")));
         assertEquals(3242606,analyser.epsilon() * analyser.gamma());
+    }
+
+    @Test
+    public void exerciseDay3SolutionB() throws IOException {
+        Analyser analyser = new Analyser(new Report(FileAdapter.readStringStreamInFile("3")));
+        assertEquals(4856080,analyser.rating(Boolean.TRUE) * analyser.rating(Boolean.FALSE));
     }
 }

@@ -103,11 +103,16 @@ public class AnalyserTest {
 
     @Test
     public void oxygenRating() {
-        //assertEquals(9, new Analyser(new Report(EXAMPLE_STRING.lines())).rating(TRUE));
+        assertEquals(23, new Analyser(new Report(EXAMPLE_STRING.lines())).rating(TRUE));
     }
 
     @Test
     public void CO2Rating() {
-        //assertEquals(10, new Analyser(new Report(EXAMPLE_STRING.lines())).rating(FALSE));
+        assertEquals(10, new Analyser(new Report(EXAMPLE_STRING.lines())).rating(FALSE));
+    }
+
+    @Test
+    public void bitListConstructor() {
+        assertEquals(new BitList("0010"), new BitList(List.of(FALSE, FALSE, TRUE, FALSE)));
     }
 }
