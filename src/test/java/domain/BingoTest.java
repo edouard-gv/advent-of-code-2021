@@ -1,7 +1,8 @@
 package domain;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BingoTest {
 
@@ -25,6 +26,16 @@ public class BingoTest {
         board.draw(2);
         board.draw(3);
         board.draw(4);
-        assertEquals(31*4*5/2*5, board.draw(5));
+        assertEquals(31 * 4 * 5 / 2 * 5, board.draw(5));
+    }
+
+    @Test
+    public void bingoThirdLine() {
+        Board board = new Board(INPUT.lines().toList());
+        board.draw(11);
+        board.draw(12);
+        board.draw(13);
+        board.draw(14);
+        assertEquals(26 * 4 * 5 / 2 * 15, board.draw(15));
     }
 }
