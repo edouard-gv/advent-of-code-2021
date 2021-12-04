@@ -1,4 +1,4 @@
 package domain.bingo;
 
-public record Number(Integer num, Boolean aFalse) {
+public record Number(Integer num, Boolean marked) {
 }
