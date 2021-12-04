@@ -28,8 +28,20 @@ public class AnalyserTest {
 
     @Test
     public void mostCommonBit() {
-        assertFalse(Report.mostCommonBit(List.of(TRUE, FALSE, FALSE)));
         assertTrue(Report.mostCommonBit(List.of(TRUE, TRUE, FALSE)));
+    }
+
+    @Test
+    public void leastCommonBit() {
+        assertTrue(!Report.mostCommonBit(List.of(TRUE, FALSE, FALSE)));
+    }
+
+    @Test
+    public void mostCommonBitBorderCases() {
+        assertTrue(Report.mostCommonBit(List.of(TRUE, FALSE, FALSE, TRUE)));
+
+        //Vérifions que !mostCommonBit est bien leastCommonBit : en cas d'égalité, on doit trouver 0 comme bit le moins commun
+        assertFalse(!Report.mostCommonBit(List.of(TRUE, FALSE, FALSE, TRUE)));
     }
 
     @Test
@@ -46,9 +58,20 @@ public class AnalyserTest {
     public void mostCommonBitList() {
         Stream<String> input = """
 0010
-0101
+0001
+0011
 0110""".lines();
-        assertEquals(new BitList(List.of(FALSE, TRUE, TRUE, FALSE)), new Report(input).mostCommonBitStream());
+    assertEquals(new BitList(List.of(FALSE, FALSE, TRUE, TRUE)), new Report(input).mostCommonBitStream());
+    }
+
+    @Test
+    public void leastCommonBitList() {
+        Stream<String> input = """
+0010
+0001
+0011
+0110""".lines();
+        assertEquals(new BitList(List.of(TRUE, TRUE, FALSE, FALSE)), new Report(input).leastCommonBitStream());
     }
 
     @Test
@@ -58,12 +81,33 @@ public class AnalyserTest {
 
     @Test
     public void gamma() {
-
         assertEquals(22, new Analyser(new Report(EXAMPLE_STRING.lines())).gamma());
     }
 
     @Test
     public void epsilon() {
         assertEquals(9, new Analyser(new Report(EXAMPLE_STRING.lines())).epsilon());
+    }
+
+    @Test
+    public void filterLinesWithBitAtPosition() {
+        String input ="""
+000
+010
+011
+101
+                """;
+
+        assertEquals(List.of("010", "011"), new Report(input.lines()).filterLinesWithBitAtPosition(TRUE, 1));
+    }
+
+    @Test
+    public void oxygenRating() {
+        //assertEquals(9, new Analyser(new Report(EXAMPLE_STRING.lines())).rating(TRUE));
+    }
+
+    @Test
+    public void CO2Rating() {
+        //assertEquals(10, new Analyser(new Report(EXAMPLE_STRING.lines())).rating(FALSE));
     }
 }

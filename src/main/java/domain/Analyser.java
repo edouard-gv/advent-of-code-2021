@@ -16,6 +16,11 @@ public class Analyser {
     }
 
     public int epsilon() {
-        return this.report.mostCommonBitStream().invert().decimal();
+        return this.report.leastCommonBitStream().decimal();
+    }
+
+    public int rating(Boolean bitCriteria) {
+
+        throw new IllegalArgumentException("Unable to calculate rating, too much numbers left");
     }
 }

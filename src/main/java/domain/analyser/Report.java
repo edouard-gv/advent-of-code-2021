@@ -12,7 +12,7 @@ public class Report {
     }
 
     static Boolean mostCommonBit(List<Boolean> bits) {
-        return bits.stream().filter(b -> b).count() > bits.size() / 2;
+        return bits.stream().filter(b -> b).count() >= bits.size() / 2.0;
     }
 
     Stream<List<Boolean>> splitStringsInColumns() {
@@ -33,4 +33,12 @@ public class Report {
         return new BitList(this.splitStringsInColumns().map(Report::mostCommonBit).toList());
     }
 
+    public BitList leastCommonBitStream() {
+        return new BitList(this.splitStringsInColumns().map(Report::mostCommonBit).toList()).invert();
+    }
+
+
+    public List<String> filterLinesWithBitAtPosition(Boolean bit, int i) {
+        return lines.stream().filter(s -> (s.charAt(i) == '1') == bit).toList();
+    }
 }
