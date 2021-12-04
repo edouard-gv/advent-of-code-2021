@@ -14,7 +14,7 @@ public class BingoTest {
             21 22 23 24 25""";
 
     @Test
-    public void bingo() {
+    public void bingoFirst() {
         Board board = new Board(INPUT.lines().toList());
         assertEquals(-1, board.draw(1));
     }
@@ -37,5 +37,25 @@ public class BingoTest {
         board.draw(13);
         board.draw(14);
         assertEquals(26 * 4 * 5 / 2 * 15, board.draw(15));
+    }
+
+    @Test
+    public void bingoNoLines() {
+        Board board = new Board(INPUT.lines().toList());
+        board.draw(1);
+        board.draw(12);
+        board.draw(3);
+        board.draw(14);
+        assertEquals(-1, board.draw(5));
+    }
+
+    @Test
+    public void bingoColumns() {
+        Board board = new Board(INPUT.lines().toList());
+        board.draw(2);
+        board.draw(7);
+        board.draw(12);
+        board.draw(17);
+        assertEquals((26*25/2-2-7-12-17-22)*22, board.draw(22));
     }
 }

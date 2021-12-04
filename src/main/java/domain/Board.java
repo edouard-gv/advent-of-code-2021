@@ -35,6 +35,19 @@ public class Board {
                 return numbers.stream().filter(n -> !n.marked()).mapToInt(Number::value).sum() * i;
             }
         }
+
+        for (int c = 0; c < width; c++) {
+            boolean bingo = true;
+            for (int l = 0; l < width; l++) {
+                if (!numbers.get(l * width + c).marked()) {
+                    bingo = false;
+                    break;
+                }
+            }
+            if (bingo) {
+                return numbers.stream().filter(n -> !n.marked()).mapToInt(Number::value).sum() * i;
+            }
+        }
         return -1;
     }
 }
