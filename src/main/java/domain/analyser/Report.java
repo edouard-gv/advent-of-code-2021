@@ -38,7 +38,7 @@ public class Report {
     }
 
 
-    public List<String> filterLinesWithBitAtPosition(Boolean bit, int i) {
+    List<String> filterLinesWithBitAtPosition(Boolean bit, int i) {
         return lines.stream().filter(s -> (s.charAt(i) == '1') == bit).toList();
     }
 
