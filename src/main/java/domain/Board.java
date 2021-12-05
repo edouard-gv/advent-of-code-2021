@@ -12,7 +12,7 @@ public class Board {
 
     public Board(List<String> lines) {
         this.width = lines.size();
-        this.numbers = lines.stream().flatMap(s -> Arrays.stream(s.split(" ")).map(Integer::parseInt)).map(Number::new).toList();
+        this.numbers = lines.stream().map(String::trim).flatMap(s -> Arrays.stream(s.split(" +")).map(Integer::parseInt)).map(Number::new).toList();
     }
 
     public int draw(int i) {
@@ -49,5 +49,12 @@ public class Board {
             }
         }
         return -1;
+    }
+
+    @Override
+    public String toString() {
+        return "Board{" +
+                "numbers=" + numbers +
+                '}';
     }
 }
