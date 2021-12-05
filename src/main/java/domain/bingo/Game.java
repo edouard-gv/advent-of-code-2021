@@ -11,6 +11,8 @@ public class Game {
     private final List<Board> boards;
     private final int[] draws;
     private int turn;
+    private int winnerIndex;
+    private int winnerScore;
 
     public Game(String input) {
         List<String> stringBoards = Arrays.stream(input.split("\\n\\n")).toList();
@@ -30,14 +32,23 @@ public class Game {
     }
 
     public boolean draw() {
-        return true;
+        winnerIndex = 0;
+        for (Board board: boards) {
+            winnerScore = board.draw(draws[turn]);
+            if (winnerScore > -1) {
+                return true;
+            }
+            winnerIndex ++;
+        }
+        turn++;
+        return false;
     }
 
     public int winnerIndex() {
-        return 2;
+        return this.winnerIndex;
     }
 
     public int winnerScore() {
-        return 4512;
+        return this.winnerScore;
     }
 }
