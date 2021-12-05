@@ -15,7 +15,7 @@ public class Game {
     private int winnerScore;
 
     public Game(String input) {
-        List<String> stringBoards = Arrays.stream(input.split("\\n\\n")).toList();
+        List<String> stringBoards = Arrays.stream(input.replaceAll("\\r\\n", "\n").split("\\n\\n")).toList();
         this.draws = Arrays.stream(stringBoards.get(0).split(",")).mapToInt(Integer::parseInt).toArray();
         stringBoards = new ArrayList<>(stringBoards);
         stringBoards.remove(0);
