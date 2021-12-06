@@ -51,7 +51,7 @@ public class FileAdapterTest {
         Game game = new Game(FileAdapter.readStringfromFile("4"));
         game.stopAtFirstWinner();
         assertEquals(48, game.winnerIndex());
-        assertEquals(31424, game.winnerScore());
+        assertEquals(31424, game.winnerScore().get().score());
     }
 
     @Test
@@ -59,7 +59,7 @@ public class FileAdapterTest {
         Game game = new Game(FileAdapter.readStringfromFile("4"));
         game.stopAtLastWinner();
         assertEquals(15,  game.winnerIndex());
-        assertEquals(23042, game.winnerScore());
+        assertEquals(23042, game.winnerScore().get().score());
     }
 
 

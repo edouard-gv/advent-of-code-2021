@@ -1,6 +1,8 @@
 package domain.bingo;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 public final class Number {
     private final Integer value;
@@ -9,6 +11,10 @@ public final class Number {
     public Number(Integer value) {
         this.value = value;
         this.marked = false;
+    }
+
+    public Optional<Number> findIn(List<Number> numbers) {
+        return numbers.stream().filter(n -> n.value().equals(value())).findFirst();
     }
 
     public Integer value() {

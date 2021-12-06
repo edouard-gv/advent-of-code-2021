@@ -7,60 +7,51 @@ import java.util.stream.Stream;
 
 public class Game {
     private final List<Board> boards;
-    private final int[] draws;
-    private int turn;
+    private final List<Number> draws;
     private Board winner;
-    private int winnerScore;
+    private Optional<Score> winnerScore;
 
     public Game(String input) {
         List<String> stringBoards = Arrays.stream(input.replaceAll("\\r\\n", "\n").split("\\n\\n")).toList();
-        this.draws = Arrays.stream(stringBoards.get(0).split(",")).mapToInt(Integer::parseInt).toArray();
+        this.draws = Arrays.stream(stringBoards.get(0).split(",")).mapToInt(Integer::parseInt).mapToObj(Number::new).toList();
         stringBoards = new ArrayList<>(stringBoards);
         stringBoards.remove(0);
         this.boards = stringBoards.stream().map(String::lines).map(Stream::toList).map(Board::new).toList();
-        turn = 0;
+        this.winnerScore = Optional.empty();
     }
 
     public List<Board> boards() {
         return boards;
     }
 
-    public int[] draws() {
+    public List<Number> draws() {
         return draws;
     }
 
-    public boolean draw() {
-        for (Board board: boards) {
-            winnerScore = board.draw(draws[turn]);
-            if (winnerScore > -1) {
-                winner = board;
-                return true;
-            }
-        }
-        turn++;
-        return false;
-    }
-
-    public Board winner() {
-        return this.winner;
-    }
-
-    public int winnerScore() {
+    public Optional<Score> winnerScore() {
         return this.winnerScore;
     }
 
     public void stopAtFirstWinner() {
-        while (!draw());
+        for (Number numberDrawn : draws) {
+            for (Board board : boards) {
+                winnerScore = board.draw(numberDrawn);
+                if (winnerScore.isPresent()) {
+                    winner = board;
+                    return;
+                }
+            }
+        }
     }
 
     public void stopAtLastWinner() {
         Set<Board> winners = new HashSet<>();
-        for (int i = 0; i < draws.length; i++) {
+        for (Number numberDrawn : draws) {
             List<Board> losers = new ArrayList<>(this.boards);
             losers.removeAll(winners);
             for (Board board : losers) {
-                int score = board.draw(draws[i]);
-                if (score > -1) {
+                Optional<Score> score = board.draw(numberDrawn);
+                if (score.isPresent()) {
                     winners.add(board);
                     winner = board;
                     winnerScore = score;

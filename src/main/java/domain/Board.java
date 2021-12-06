@@ -1,7 +1,9 @@
 package domain;
 
 import domain.bingo.Number;
+import domain.bingo.Score;
 
+import javax.swing.text.html.Option;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -15,40 +17,45 @@ public class Board {
         this.numbers = lines.stream().map(String::trim).flatMap(s -> Arrays.stream(s.split(" +")).map(Integer::parseInt)).map(Number::new).toList();
     }
 
-    public int draw(int i) {
-        Optional<Number> found = this.numbers.stream().filter(n -> n.value() == i).findFirst();
-        if (found.isEmpty()) {
-            return -1;
+    public Optional<Score> draw(Number numberDrawn) {
+        Optional<Number> optionalFound = numberDrawn.findIn(this.numbers);
+        if (optionalFound.isEmpty()) {
+            return Optional.empty();
         }
 
-        found.get().setMarked();
+        optionalFound.get().setMarked();
 
-        for (int l = 0; l < width; l++) {
+        Optional<Score> score = checkIfWonAndThenReturnScore(numberDrawn, true);
+        if (score.isPresent()) return score;
+
+        score = checkIfWonAndThenReturnScore(numberDrawn, false);
+        if (score.isPresent()) return score;
+
+        return Optional.empty();
+    }
+
+    private Optional<Score> checkIfWonAndThenReturnScore(Number numberDrawn, boolean direction) {
+        for (int i = 0; i < width; i++) {
             boolean bingo = true;
-            for (int c = 0; c < width; c++) {
-                if (!numbers.get(l * width + c).marked()) {
+            for (int j = 0; j < width; j++) {
+                if (!getNumberAt(direction ? j : i, direction ? i : j).marked()) {
                     bingo = false;
                     break;
                 }
             }
             if (bingo) {
-                return numbers.stream().filter(n -> !n.marked()).mapToInt(Number::value).sum() * i;
+                return Optional.of(computeScore(numberDrawn));
             }
         }
+        return Optional.empty();
+    }
 
-        for (int c = 0; c < width; c++) {
-            boolean bingo = true;
-            for (int l = 0; l < width; l++) {
-                if (!numbers.get(l * width + c).marked()) {
-                    bingo = false;
-                    break;
-                }
-            }
-            if (bingo) {
-                return numbers.stream().filter(n -> !n.marked()).mapToInt(Number::value).sum() * i;
-            }
-        }
-        return -1;
+    private Number getNumberAt(int i, int j) {
+        return numbers.get(j * width + i);
+    }
+
+    private Score computeScore(Number number) {
+        return new Score(numbers.stream().filter(n -> !n.marked()).mapToInt(Number::value).sum() * number.value());
     }
 
     @Override
