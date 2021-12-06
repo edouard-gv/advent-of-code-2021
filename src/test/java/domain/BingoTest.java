@@ -93,8 +93,17 @@ public class BingoTest {
         Game game = new Game(ACCEPTANCE_INPUT);
         assertArrayEquals(new int[]{7,4,9,5,11,17,23,2,0,14,21,24,10,16,13,6,15,25,12,22,18,20,8,19,3,26,1}, game.draws());
         assertEquals(3, game.boards().size());
-        while (!game.draw());
+        game.stopAtFirstWinner();
         assertEquals(2, game.winnerIndex());
         assertEquals(4512, game.winnerScore());
     }
+
+    @Test
+    public void acceptanceTestPArtB() {
+        Game game = new Game(ACCEPTANCE_INPUT);
+        game.stopAtLastWinner();
+        assertEquals(1, game.winnerIndex());
+        assertEquals(1924, game.winnerScore());
+    }
+
 }

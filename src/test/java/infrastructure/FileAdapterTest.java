@@ -47,11 +47,19 @@ public class FileAdapterTest {
     }
 
     @Test
-    public void exerciseDay4Solution() throws IOException {
+    public void exerciseDay4SolutionA() throws IOException {
         Game game = new Game(FileAdapter.readStringfromFile("4"));
-        while (!game.draw());
+        game.stopAtFirstWinner();
         assertEquals(48, game.winnerIndex());
         assertEquals(31424, game.winnerScore());
+    }
+
+    @Test
+    public void exerciseDay4SolutionB() throws IOException {
+        Game game = new Game(FileAdapter.readStringfromFile("4"));
+        game.stopAtLastWinner();
+        assertEquals(15,  game.winnerIndex());
+        assertEquals(23042, game.winnerScore());
     }
 
 
